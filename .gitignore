@@ -1,0 +1,15 @@
+*.o
+
+*.a
+
+*.log
+
+linux-smohamed
+
+*.pub
+
+cpp_vrep_main
+
+imacs
+
+imacsLKAS

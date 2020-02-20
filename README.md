@@ -1,11 +1,17 @@
 # Setting up cppVrepLKAS in Linux
 A software-in-the-loop simulator for lane keeping assist system (LKAS) using Vrep and C++. 
 If you are using this framework please refer to the following paper:
+
 `S. Mohamed, S. De, K. Bimpisidis, V, Nathan, D. Goswami, H. Corporaal, and T. Basten, “IMACS: A Framework for Performance Evaluation of Image Approximation in a Closed-loop System,” in: MECO, 2019.`
+
 The LKAS controller is designed as explained in the following papers. The controller is designed in Matlab and the control matrices `\Phi`, `\Gamma`, and control gains `K` (and `F`) are copied to the `src/LaneDetection_and_Control/lateralcontrol_multiple.cpp` file.
-`1. S. Mohamed, A. U. Awan, D. Goswami, T. Basten, "Designing image-based control systems considering workload variations," in: CDC, 2019.
-2. S. Mohamed, D. Zhu, D. Goswami, T. Basten, "Optimising quality-of-control for data-intensive multiprocessor image-based control systems considering workload variations," in: DSD, 2018.`
+
+`1. S. Mohamed, A. U. Awan, D. Goswami, T. Basten, "Designing image-based control systems considering workload variations," in: CDC, 2019.`
+
+`2. S. Mohamed, D. Zhu, D. Goswami, T. Basten, "Optimising quality-of-control for data-intensive multiprocessor image-based control systems considering workload variations," in: DSD, 2018.`
+
 An initial framework using Vrep and Matlab has been presented in:
+
 `S. Mohamed, D. Zhu, D. Goswami, T. Basten, "DASA: an open-source design, analysis and simulation framework for automotive image-based control systems," in: MCAA Annual Conference, 2019.`
 
 Tested using the following versions. If you would like to use latest versions, you might have to edit the syntax of some functions.

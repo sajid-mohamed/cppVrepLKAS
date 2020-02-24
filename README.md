@@ -26,7 +26,7 @@ Tested with the following versions:
 4. Install VREP
 5. Run IMACS_LKAS
 
-Initially, clone this repository
+Initially, clone this repository:
 ```
 git clone https://github.com/sajid-mohamed/cppVrepLKAS.git
 cd cppVrepLKAS
@@ -84,8 +84,9 @@ echo 'export PATH="/usr/lib/ccache:$PATH"' | tee -a ~/.bashrc
 source ~/.bashrc && echo $PATH
 ```
 ### 2.2 Install java
-https://www.digitalocean.com/community/tutorials/how-to-install-java-with-apt-on-ubuntu-18-04
-In case there is an error: unable to locate `*.jar`
+You can follow the tutorial here: https://www.digitalocean.com/community/tutorials/how-to-install-java-with-apt-on-ubuntu-18-04.
+
+In case there is an error: unable to locate `*.jar`:
 ```
 sudo apt install default-jre
 sudo apt install default-jdk
@@ -108,6 +109,8 @@ Now reload this file to apply the changes to your current session:
 ```
 source /etc/environment
 ```
+If you do not have `sudo` access, follow the steps in `FAQ 4`.
+
 ### 2.3 Getting OpenCV Source Code
 ```
 cd $(root)/externalApps

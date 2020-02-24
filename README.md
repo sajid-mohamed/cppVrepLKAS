@@ -26,6 +26,14 @@ Tested with the following versions:
 4. Install VREP
 5. Run IMACS_LKAS
 
+Initially, clone this repository
+```
+git clone https://github.com/sajid-mohamed/cppVrepLKAS.git
+cd cppVrepLKAS
+pwd
+```
+For brevity, `$(root)=pwd`, i.e. the path to `cppVrepLKAS` is called as `$(root)`. 
+
 # 1-4 Dependencies
 
 ## 1. Dependent libraries

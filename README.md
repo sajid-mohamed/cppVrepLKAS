@@ -59,22 +59,15 @@ sudo apt-get install libqt4-dev
 ```
 ## 2. Installing OpenCV
 
-If opencv is already installed, make sure `opencv.pc` file is in the `/usr/lib/pkgconfig` or change the `PKG_CONFIG_PATH` to point to this file.
+If opencv is already installed, go to step `2.5`.
 
 If not installed, follow the OpenCV installation steps from https://docs.opencv.org/trunk/d7/d9f/tutorial_linux_install.html.
 
-Required Packages:
-* GCC 4.4.x or later
-* CMake 2.8.7 or higher
-* Git
-* GTK+2.x or higher, including headers (libgtk2.0-dev)
-* pkg-config
-* Python 2.6 or later and Numpy 1.5 or later with developer packages (python-dev, python-numpy)
-* ffmpeg or libav development packages: libavcodec-dev, libavformat-dev, libswscale-dev
-* [optional] libtbb2 libtbb-dev
-* [optional] libdc1394 2.x
-* [optional] libjpeg-dev, libpng-dev, libtiff-dev, libjasper-dev, libdc1394-22-dev
-* [optional] CUDA Toolkit 6.5 or higher
+In case you have errors with `ccache` do `2.1`.
+
+If you have issues with `java` (e.g. if there is an error: unable to locate `*.jar`) do `2.2`.
+
+After `2.1` or `2.2` you can continue from `2.3`.
 
 ### 2.1 Install ccache
 ```
@@ -117,6 +110,8 @@ cd $(root)/externalApps
 git clone https://github.com/opencv/opencv.git
 git clone https://github.com/opencv/opencv_contrib.git
 ```
+`externalApps` is a folder already available when you `git clone cppVrepLKAS`. It might be better to include all the external apps in this folder.
+
 ### 2.4 Building OpenCV from Source Using CMake
 ```
 cd opencv
@@ -126,12 +121,16 @@ cmake -D CMAKE_BUILD_TYPE=Release -D CMAKE_INSTALL_PREFIX=/usr/local .. -DOPENCV
 make
 sudo make install
 ```
+### 2.5 `opencv.pc` should be in the `PKG_CONFIG_PATH`
+Make sure `opencv.pc` file is in the `/usr/lib/pkgconfig` or change the `PKG_CONFIG_PATH` to point to this file. To change path follow the steps in `FAQ 3` or `FAQ 4` depending on whether you have `sudo` rights.
+Remember the path to your `opencv` installation as `OPENCV_PATH`.
 
 ## 3. Install eigen
 ```
 cd $(root)/externalApps
 git clone https://gitlab.com/libeigen/eigen.git
 ```
+The path to eigen is needed later for `EIGEN_PATH`.
 ## 4. Install Vrep
 ```
 cd $(root)/externalApps

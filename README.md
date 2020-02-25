@@ -121,6 +121,9 @@ cmake -D CMAKE_BUILD_TYPE=Release -D CMAKE_INSTALL_PREFIX=/usr/local .. -DOPENCV
 make
 sudo make install
 ```
+Note the path of `opencv*.pc` file. This is the `PKG_CONFIG_PATH`. 
+Typically this should be `/usr/lib/pkgconfig`. If you are using virtual machine this might be `/usr/local/lib/pkgconfig`.
+
 ### 2.5 `opencv.pc` should be in the `PKG_CONFIG_PATH`
 Make sure `opencv.pc` file is in the `/usr/lib/pkgconfig` or change the `PKG_CONFIG_PATH` to point to this file. To change path follow the steps in `FAQ 3` or `FAQ 4` depending on whether you have `sudo` rights.
 Remember the path to your `opencv` installation as `OPENCV_PATH`.
@@ -174,7 +177,7 @@ Please change the paths in the following files to the corresponding paths in you
 $(IMACSROOT)/cppVrepLKAS.pro
 $(IMACSROOT)/src/LaneDetection_and_Control/lane_detection.cpp
 ```
-1. If the external applications vrep, eigen or opencv are installed to another directory than the `$(ROOT)/externalApps`, change the corresponding `OPENCV_PATH`, `EIGEN_PATH`, and `VREP_PATH` in `cppVrepLKAS.pro` to the corresponding PATH in your system. 
+1. If the external applications vrep, eigen or opencv are installed to another directory than the `$(ROOT)/externalApps`, change the corresponding `OPENCV_PATH`, `PKG_CONFIG_PATH`, `EIGEN_PATH`, and `VREP_PATH` in `cppVrepLKAS.pro` to the corresponding PATH in your system. 
 
 To obtain the path, you could run `pwd` in a terminal opened from the corresponding folder.
 

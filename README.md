@@ -130,6 +130,12 @@ To check if `opencv.pc` is in the `/usr/lib/pkgconfig`:
 cd /usr/lib/pkgconfig
 [ -f /usr/lib/pkgconfig/opencv.pc ] && echo "File exist"
 ```
+You could also use `dlocate` to find the file.
+
+If you cannot find it, try:
+```
+sudo apt-get install libopencv-dev
+```
 
 ## 3. Install eigen
 ```

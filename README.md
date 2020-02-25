@@ -125,6 +125,12 @@ sudo make install
 Make sure `opencv.pc` file is in the `/usr/lib/pkgconfig` or change the `PKG_CONFIG_PATH` to point to this file. To change path follow the steps in `FAQ 3` or `FAQ 4` depending on whether you have `sudo` rights.
 Remember the path to your `opencv` installation as `OPENCV_PATH`.
 
+To check if `opencv.pc` is in the `/usr/lib/pkgconfig`:
+```
+cd /usr/lib/pkgconfig
+[ -f /usr/lib/pkgconfig/opencv.pc ] && echo "File exist"
+```
+
 ## 3. Install eigen
 ```
 cd $(root)/externalApps

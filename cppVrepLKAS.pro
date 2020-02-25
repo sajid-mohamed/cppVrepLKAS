@@ -8,6 +8,7 @@ IMACSROOT = $(PWD)
 OPENCV_PATH = /home/sajid/apps/opencv
 VREP_PATH   = $$IMACSROOT/externalApps/vrep
 EIGEN_PATH  = $$IMACSROOT/externalApps/eigen
+PKG_CONFIG_PATH = /usr/lib/pkgconfig
 
 DEFINES -= UNICODE
 CONFIG   += console
@@ -60,7 +61,7 @@ unix:!macx {
     LIBS += -lm
     LIBS += `pkg-config opencv --cflags --libs`
     LIBS += -L/usr/lib
-    LIBS += -L/usr/lib/pkgconfig
+    LIBS += -L$$PKG_CONFIG_PATH
     LIBS += -L$$OPENCV_PATH -ljpeg
     LIBS += `libpng-config --cflags --ldflags`
     LIBS += -lpthread
@@ -73,7 +74,7 @@ INCLUDEPATH += "$$VREP_PATH/programming/remoteApi"
 INCLUDEPATH += "$$EIGEN_PATH"
 INCLUDEPATH += "$$IMACSROOT/src/cpp_vrep_api"
 INCLUDEPATH += "$$IMACSROOT/include"
-INCLUDEPATH += "/usr/lib/pkgconfig"
+INCLUDEPATH += "$$PKG_CONFIG_PATH"
 INCLUDEPATH += "$$IMACSROOT/src/LaneDetection_and_Control"
 
 SOURCES += \

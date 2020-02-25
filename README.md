@@ -137,15 +137,21 @@ cd $(root)/externalApps
 git clone https://gitlab.com/libeigen/eigen.git
 ```
 The path to eigen is needed later for `EIGEN_PATH`.
-## 4. Install Vrep
+## 4. Install Vrep (CoppeliaSim)
+Download the linux version from https://coppeliarobotics.com/downloads. 
+
+The license to CoppeliaSim should be obtained from their website. 
+
+If you are in an academic institution, you could simply download the `Edu` version.
+
+Make sure you copy the downloaded file (e.g. `CoppeliaSim_Edu_V4_0_0_Ubuntu18_04.tar.xz`) to the `$(root)/externalApps` folder.
 ```
+cp CoppeliaSim_Edu_V4_0_0_Ubuntu18_04.tar.xz $(root)/externalApps
 cd $(root)/externalApps
-```
-Download the linux version from https://coppeliarobotics.com/downloads.
-```
 mkdir vrep
 tar -xvf CoppeliaSim_Edu_V4_0_0_Ubuntu18_04.tar.xz -C vrep --strip-components=1
 ```
+
 Generally for local tar file:
 ```
 tar -xvf FILENAME -C FOLDER --strip-components=1
@@ -155,7 +161,7 @@ The `--strip-components` flag is used when a tar file would naturally expand its
 # 5. Running cppVrepLKAS
 
 ## 5.1 Change hardcoded paths
-Please change paths to your own system in the following files
+Please change the paths in the following files to the corresponding paths in your own system.
 ```
 $(ROOT)/src/LaneDetection_and_Control/lane_detection.cpp
 $(IMACSROOT)/cppVrepLKAS.pro

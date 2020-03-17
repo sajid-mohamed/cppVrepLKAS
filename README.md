@@ -26,7 +26,9 @@ Tested with the following versions:
 4. Install VREP
 5. Run IMACS_LKAS
 
-Initially, clone this repository:
+It is suggested that you Fork [this](https://github.com/sajid-mohamed/cppVrepLKAS) repository by clicking the "fork" button in the top right. This lets you have your own working copy.
+
+Clone the forked (or directly [this](https://github.com/sajid-mohamed/cppVrepLKAS)) repository:
 ```
 git clone https://github.com/sajid-mohamed/cppVrepLKAS.git
 cd cppVrepLKAS

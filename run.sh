@@ -1,5 +1,5 @@
 #!/bin/sh
-read -p "Please set correctly the VREP_PATH, OPENCV_PATH and EIGEN_PATH in cppVrepLKAS.pro first. Press enter after setting the paths."
+read -p "Please set correctly the VREP_PATH, OPENCV_PATH, PKG_CONFIG_PATH and EIGEN_PATH in cppVrepLKAS.pro first. Also append the PKG_CONFIG_PATH in paths.sh. Press enter after setting the paths."
 source /etc/environment
 source paths.sh
 qmake cppVrepLKAS.pro

@@ -302,3 +302,28 @@ source paths.sh
 ## 5. The simulation time is hardcoded to 15 in src/cpp_vrep_api/cpp_vrep_framework.cpp. This may result in erroneous behaviour after the simulation exceeds this time.
 Change line 11 in `src/cpp_vrep_api/cpp_vrep_framework.cpp` if you want to simulate for a longer time, i.e. `int simulation_time = 100;` if you want to logically simulate for `100 sec`.
 
+## 6. How to start a straight road scene?
+To start a straight road scene (see `vrep-scenes/SmallBias_report.ttt`), replace line 7 in `run.sh` with the following
+```
+gnome-terminal -- sh -c 'cd externalApps/vrep; ./coppeliaSim.sh ../../vrep-scenes/SmallBias_report.ttt; exec bash'
+```
+
+## 7. Points to remember if running the framework using `bash run.sh`
+If you are making changes to the `cppVrepLKAS.pro` file, you would have to run the command `make clean` first in the terminal before running `bash run.sh`.
+```
+make clean
+bash run.sh
+```
+## 8. Control design: relation of matlab control codes in [1],[2] and [3] to the framework
+The `lateralcontrol_multiple.cpp` has a sample controller implemented. 
+
+You are required to adapt the codes according to the control design you choose (especially the `lateralController::compute_steering_angles()` function). Ideally, you should rewrite the `lateralController::compute_steering_angles()` function.
+
+| Matlab variable | Framework equivalent |                                   Files to change                                   |
+|:---------------:|:--------------------:|:-----------------------------------------------------------------------------------:|
+|       `phi`       |       `m_phi_aug`      | `src/laneDetection_and_Control/lateralcontrol_multiple.cpp`, `include/config.hpp:76-83` |
+|     `Gamma`     |     `m_Gamma_aug`     | `src/laneDetection_and_Control/lateralcontrol_multiple.cpp`, `include/config.hpp:76-83` |
+|        `K`        |         `m_K2c`        | `src/laneDetection_and_Control/lateralcontrol_multiple.cpp`, `include/config.hpp:76-83` |
+|        `h`        |       `period_s`       |                      `src/cpp_vrep_api/cpp_vrep_framework.cpp:40`                     |
+|       `tau`       |        `delay_s`       |                      `src/cpp_vrep_api/cpp_vrep_framework.cpp:41`                     |
+

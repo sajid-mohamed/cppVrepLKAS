@@ -322,8 +322,16 @@ You are required to adapt the codes according to the control design you choose (
 | Matlab variable | Framework equivalent |                                   Files to change                                   |
 |:---------------:|:--------------------:|:-----------------------------------------------------------------------------------:|
 |       `phi`       |       `m_phi_aug`      | `src/laneDetection_and_Control/lateralcontrol_multiple.cpp`, `include/config.hpp:76-83` |
-|     `Gamma`     |     `m_Gamma_aug`     | `src/laneDetection_and_Control/lateralcontrol_multiple.cpp`, `include/config.hpp:76-83` |
+|     `Gamma`       |     `m_Gamma_aug`      | `src/laneDetection_and_Control/lateralcontrol_multiple.cpp`, `include/config.hpp:76-83` |
 |        `K`        |         `m_K2c`        | `src/laneDetection_and_Control/lateralcontrol_multiple.cpp`, `include/config.hpp:76-83` |
+|       `T`         |        `m_T`           | `src/laneDetection_and_Control/lateralcontrol_multiple.cpp`, `include/config.hpp:76-83` |
 |        `h`        |       `period_s`       |                      `src/cpp_vrep_api/cpp_vrep_framework.cpp:40`                     |
 |       `tau`       |        `delay_s`       |                      `src/cpp_vrep_api/cpp_vrep_framework.cpp:41`                     |
 
+## 9. Some variable descriptions
+
+| Variable |Description |                                   Files to change                                   |
+|:---------------:|:--------------------:|:-----------------------------------------------------------------------------------:|
+|       `simstep`       |      Simulation step time: calculated as a greatest common factor between h and tau. A really low value would slow down the simulation.      | `src/cpp_vrep_api/cpp_vrep_framework.cpp:10` |
+|       `simulation_time`       |      Total simulation time: total logical time for which you want to run the simulation.     | `src/cpp_vrep_api/cpp_vrep_framework.cpp:11` |
+|       `wait_time`       |      Initialisation time for which the controller is inactive. May be needed to achieve required vehicle speed or for getting the initial frame. (set this to 2.5 seconds, if getting errors).    | `src/cpp_vrep_api/cpp_vrep_framework.cpp:12` |

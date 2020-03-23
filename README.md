@@ -137,7 +137,9 @@ cd /usr/lib/pkgconfig
 ```
 You could also use `dlocate` to find the file.
 
-If you cannot find it, try:
+If you cannot find it, you might not have done `make install`.
+
+Alternatively, try:
 ```
 sudo apt-get install libopencv-dev
 ```

@@ -335,3 +335,7 @@ You are required to adapt the codes according to the control design you choose (
 |       `simstep`       |      Simulation step time: calculated as a greatest common factor between h and tau. A really low value would slow down the simulation.      | `src/cpp_vrep_api/cpp_vrep_framework.cpp:10` |
 |       `simulation_time`       |      Total simulation time: total logical time for which you want to run the simulation.     | `src/cpp_vrep_api/cpp_vrep_framework.cpp:11` |
 |       `wait_time`       |      Initialisation time for which the controller is inactive. May be needed to achieve required vehicle speed or for getting the initial frame. (set this to 2.5 seconds, if getting errors).    | `src/cpp_vrep_api/cpp_vrep_framework.cpp:12` |
+## 10. Implementing pipelining
+The current code is for sequential implementation. To enforce pipelining, you have to change `src/cpp_vrep_api/cpp_vrep_framework.cpp:91-102`.
+Especially, have an array of control inputs (steering_angle values) and only actuate corresponding to the sampling period.
+

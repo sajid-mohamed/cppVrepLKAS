@@ -341,3 +341,5 @@ You are required to adapt the codes according to the control design you choose (
 The current code is for sequential implementation. To enforce pipelining, you have to change `src/cpp_vrep_api/cpp_vrep_framework.cpp:91-102`.
 Especially, have an array of control inputs (steering_angle values) and only actuate corresponding to the sampling period.
 
+To implement the pipelining, you would also have to amend `src/cpp_vrep_api/cpp_vrep_framework.cpp:97` to send the corresponding steering_angle instead of the latest one. You might also have to edit `VrepAPI.sim_delay(time_step)` accordingly.
+

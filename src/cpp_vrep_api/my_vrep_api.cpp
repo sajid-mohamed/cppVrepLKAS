@@ -31,6 +31,7 @@ Mat vrepAPI::vrep_img_2_Mat(){
 		}
 	}		
 	merge(three_channels, out_Mat);
+	//merge(&three_channels[0], three_channels.size(), out_Mat); Try this if the above fails
 	return out_Mat;
 
 	// split(m_out_Mat[the_iter], m_three_channels[the_iter]);	

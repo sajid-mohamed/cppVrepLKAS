@@ -40,8 +40,7 @@ int main(int argc, char **argv) {
 	using namespace std;
 	using namespace cv;
 	float simstep = 0.005; // V-rep simulation step time	
-	int simulation_time = 15;
-	float wait_time = 0.015;
+	int simulation_time = 15;	
 	if (argc < 2) {
 		cout << "Minimum one argument needed.\n Usage: ./cpp_vrep_main {int pipeline_version} {float simstep}\n";
 		cout << "Eg: ./cpp_vrep_main 1\t (default): ./cpp_vrep_main 1 0.005\n";
@@ -51,6 +50,7 @@ int main(int argc, char **argv) {
 		simstep = stof(argv[2]);
 		cout << "simstep: "<< simstep << endl;
 	}
+	float wait_time = 3*simstep;
 	// ------- simulation parameters ----------//	
 	//string analysis = argv[2];
 	//string env = argv[3];

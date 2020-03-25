@@ -36,6 +36,16 @@ pwd
 ```
 For brevity, `$(root)=pwd`, i.e. the path to `cppVrepLKAS` is called as `$(root)`. 
 
+# File Structure
+
+| File Name |                                   Description                                   |
+|:---------------:|:-----------------------------------------------------------------------------------:|
+|       `src/cpp_vrep_api/cpp_vrep_framework.cpp`      |     Main file; The framework initialisation variables are defined here. The synchronous (lock-step) simulation is also enforced here.  |
+|       `src/cpp_vrep_api/my_vrep_api.cpp`       |      Functions needed to setup the VREP API. |
+|       `src/LaneDetection_and_Control/lane_detection.cpp`       |      The image processing (perception) is defined here. |
+| `src/LaneDetection_and_Control/lateralcontrol_multiple.cpp` | The controller is defined here. |
+| `include/config.hpp` | Declarations of the variables in the above two files can be found here. |
+
 # 1.-4. Dependencies
 
 ## 1. Dependent libraries

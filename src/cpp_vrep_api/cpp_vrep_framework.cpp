@@ -50,7 +50,7 @@ int main(int argc, char **argv) {
 		simstep = stof(argv[2]);
 		cout << "simstep: "<< simstep << endl;
 	}
-	float wait_time = 3*simstep;
+	//float wait_time = 3*simstep;
 	// ------- simulation parameters ----------//	
 	//string analysis = argv[2];
 	//string env = argv[3];
@@ -91,7 +91,7 @@ int main(int argc, char **argv) {
     //IBCController Controller;
 
 	// --- delay 2.5 sec to reach desired velocity ---//		
-	time_step = wait_time / simstep;
+	time_step = 2.5 / simstep;
 	cout << "\t\t\tinitialising... waiting for " << time_step << " simulation steps\n\t\t\t";
 	//time_step = period_s[pipeline_version] / simstep;
 	VrepAPI.sim_delay(time_step);

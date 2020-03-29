@@ -195,7 +195,7 @@ $(IMACSROOT)/src/LaneDetection_and_Control/lane_detection.cpp
 
 To obtain the path, you could run `pwd` in a terminal opened from the corresponding folder.
 
-2. Change line 89 of `lane_detection.cpp` to `string out_string = "$(ROOT)/out_imgs";` where $(IMACSROOT) is your actual path.
+2. Change line 121 of `lane_detection.cpp` to `string out_string = "$(ROOT)/out_imgs";` where $(IMACSROOT) is your actual path.
 
 ## 5.2 Run bash script and follow the instructions to check if the framework is working
 ```
@@ -312,7 +312,7 @@ cd $(IMACSROOT)
 source paths.sh
 ```
 ## 5. The simulation time is hardcoded to 15 in src/cpp_vrep_api/cpp_vrep_framework.cpp. This may result in erroneous behaviour after the simulation exceeds this time.
-Change line 11 in `src/cpp_vrep_api/cpp_vrep_framework.cpp` if you want to simulate for a longer time, i.e. `int simulation_time = 100;` if you want to logically simulate for `100 sec`.
+Change line 43 in `src/cpp_vrep_api/cpp_vrep_framework.cpp` if you want to simulate for a longer time, i.e. `int simulation_time = 100;` if you want to logically simulate for `100 sec`.
 
 ## 6. How to start a straight road scene?
 To start a straight road scene (see `vrep-scenes/SmallBias_report.ttt`), replace line 7 in `run.sh` with the following
@@ -337,19 +337,19 @@ You are required to adapt the codes according to the control design you choose (
 |     `Gamma`       |     `m_Gamma_aug`      | `src/laneDetection_and_Control/lateralcontrol_multiple.cpp`, `include/config.hpp:76-83` |
 |        `K`        |         `m_K2c`        | `src/laneDetection_and_Control/lateralcontrol_multiple.cpp`, `include/config.hpp:76-83` |
 |       `T`         |        `m_T`           | `src/laneDetection_and_Control/lateralcontrol_multiple.cpp`, `include/config.hpp:76-83` |
-|        `h`        |       `period_s`       |                      `src/cpp_vrep_api/cpp_vrep_framework.cpp:40`                     |
-|       `tau`       |        `delay_s`       |                      `src/cpp_vrep_api/cpp_vrep_framework.cpp:41`                     |
+|        `h`        |       `period_s`       |                      `src/cpp_vrep_api/cpp_vrep_framework.cpp:72`                     |
+|       `tau`       |        `delay_s`       |                      `src/cpp_vrep_api/cpp_vrep_framework.cpp:73`                     |
 
 ## 9. Some variable descriptions
 
 | Variable |Description |                                   Files to change                                   |
 |:---------------:|:--------------------:|:-----------------------------------------------------------------------------------:|
-|       `simstep`       |      Simulation step time: calculated as a greatest common factor between h and tau. A really low value would slow down the simulation.      | `src/cpp_vrep_api/cpp_vrep_framework.cpp:10` |
-|       `simulation_time`       |      Total simulation time: total logical time for which you want to run the simulation.     | `src/cpp_vrep_api/cpp_vrep_framework.cpp:11` |
-|       `wait_time`       |      Initialisation time for which the controller is inactive. May be needed to achieve required vehicle speed or for getting the initial frame. (set this to 2.5 seconds, if getting errors).    | `src/cpp_vrep_api/cpp_vrep_framework.cpp:12` |
+|       `simstep`       |      Simulation step time: calculated as a greatest common factor between h and tau. A really low value would slow down the simulation.      | `src/cpp_vrep_api/cpp_vrep_framework.cpp:42` |
+|       `simulation_time`       |      Total simulation time: total logical time for which you want to run the simulation.     | `src/cpp_vrep_api/cpp_vrep_framework.cpp:43` |
+|       `wait_time`       |      Initialisation time for which the controller is inactive. May be needed to achieve required vehicle speed or for getting the initial frame. (set this to 2.5 seconds, if getting errors).    | `src/cpp_vrep_api/cpp_vrep_framework.cpp` |
 ## 10. Implementing pipelining
-The current code is for sequential implementation. To enforce pipelining, you have to change `src/cpp_vrep_api/cpp_vrep_framework.cpp:91-102`.
+The current code is for sequential implementation. To enforce pipelining, you have to change `src/cpp_vrep_api/cpp_vrep_framework.cpp:123-134`.
 Especially, have an array of control inputs (steering_angle values) and only actuate corresponding to the sampling period.
 
-To implement the pipelining, you would also have to amend `src/cpp_vrep_api/cpp_vrep_framework.cpp:97` to send the corresponding steering_angle instead of the latest one. You might also have to edit `VrepAPI.sim_delay(time_step)` accordingly.
+To implement the pipelining, you would also have to amend `src/cpp_vrep_api/cpp_vrep_framework.cpp:129` to send the corresponding steering_angle instead of the latest one. You might also have to edit `VrepAPI.sim_delay(time_step)` accordingly.
 

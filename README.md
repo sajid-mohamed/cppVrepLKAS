@@ -160,10 +160,7 @@ To obtain the path, you could run `pwd` in a terminal opened from the correspond
 cd $(root)
 bash run.sh
 ```
-You can change the commands in this file to run automatically.
-
-In case the `run.sh` does not work, do the following steps `5.3 - 5.5`.
-The steps included in the bash script are the following:
+The steps included in the bash script `run.sh` are the following:
 
 #### 1. Generate Makefile for imacsLKAS
 Generate the `Makefile` using `qmake`.

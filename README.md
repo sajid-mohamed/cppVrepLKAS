@@ -1,4 +1,4 @@
-# Setting up cppVrepLKAS in Linux
+# imacsLKAS
 A software-in-the-loop simulator for lane keeping assist system (LKAS) using Vrep and C++. 
 If you are using this framework please refer to the following paper:
 
@@ -36,19 +36,11 @@ pwd
 ```
 For brevity, `$(root)=pwd`, i.e. the path to `cppVrepLKAS` is called as `$(root)`. 
 
-# File Structure
+------------------------------------------------------------------------------------------
 
-| File Name |                                   Description                                   |
-|:---------------:|:-----------------------------------------------------------------------------------:|
-|       `src/cpp_vrep_api/cpp_vrep_framework.cpp`      |     Main file; The framework initialisation variables are defined here. The synchronous (lock-step) simulation is also enforced here.  |
-|       `src/cpp_vrep_api/my_vrep_api.cpp`       |      Functions needed to setup the VREP API. |
-|       `src/LaneDetection_and_Control/lane_detection.cpp`       |      The image processing (perception) is defined here. |
-| `src/LaneDetection_and_Control/lateralcontrol_multiple.cpp` | The controller is defined here. |
-| `include/config.hpp` | Declarations of the variables in the above two files can be found here. |
+# Setting up cppVrepLKAS in Linux
 
-# 1.-4. Dependencies
-
-## 1. Dependent libraries
+## 1. Installing Dependent libraries
 The following libraries might be needed for successful execution.
 ```
 sudo apt-get install libtinfo-dev
@@ -69,54 +61,14 @@ sudo apt-get install cmake
 sudo apt-get install qt4-qmake
 sudo apt-get install libqt4-dev
 ```
+
 ## 2. Installing OpenCV
 
-If opencv is already installed, go to step `2.5`.
+If opencv is already installed, go to step `2.2`.
 
-If not installed, follow the OpenCV installation steps from https://docs.opencv.org/trunk/d7/d9f/tutorial_linux_install.html.
+### 2.1 Quick Install OpenCV from Source Code
 
-In case you have errors with `ccache` do `2.1`.
-
-If you have issues with `java` (e.g. if there is an error: unable to locate `*.jar`) do `2.2`.
-
-After `2.1` or `2.2` you can continue from `2.3`.
-
-### 2.1 Install ccache
-```
-sudo apt install -y ccache
-sudo /usr/sbin/update-ccache-symlinks
-echo 'export PATH="/usr/lib/ccache:$PATH"' | tee -a ~/.bashrc
-source ~/.bashrc && echo $PATH
-```
-### 2.2 Install java
-You can follow the tutorial here: https://www.digitalocean.com/community/tutorials/how-to-install-java-with-apt-on-ubuntu-18-04.
-
-In case there is an error: unable to locate `*.jar`:
-```
-sudo apt install default-jre
-sudo apt install default-jdk
-sudo update-alternatives --config javac
-sudo update-alternatives --config java
-```
-Choose the correct `jdk` version. `jre` does not have `tools.jar`
-Update the JAVA_HOME path
-```
-sudo gedit /etc/environment
-```
-At the end of this file, add the following line, making sure to replace the path with your own copied path:
-```
-JAVA_HOME="/usr/lib/jvm/java-11-openjdk-amd64/bin/"
-```
-Modifying this file will set the JAVA_HOME path for all users on your system.
-Save the file and exit the editor.
-
-Now reload this file to apply the changes to your current session:
-```
-source /etc/environment
-```
-If you do not have `sudo` access, follow the steps in `FAQ 4`.
-
-### 2.3 Getting OpenCV Source Code
+For detailed OpenCV installation: follow steps from https://docs.opencv.org/trunk/d7/d9f/tutorial_linux_install.html.
 ```
 cd $(root)/externalApps
 git clone https://github.com/opencv/opencv.git
@@ -124,8 +76,8 @@ git clone https://github.com/opencv/opencv_contrib.git
 ```
 `externalApps` is a folder already available when you `git clone cppVrepLKAS`. It might be better to include all the external apps in this folder.
 
-### 2.4 Building OpenCV from Source Using CMake
 ```
+# Building OpenCV from Source Using CMake
 cd opencv
 mkdir build
 cd build
@@ -136,20 +88,25 @@ sudo make install
 Note the path of `opencv*.pc` file. This is the `PKG_CONFIG_PATH`. 
 Typically this should be `/usr/lib/pkgconfig`. If you are using virtual machine this might be `/usr/local/lib/pkgconfig`.
 
-### 2.5 `opencv.pc` should be in the `PKG_CONFIG_PATH`
-Make sure `opencv.pc` file is in the `/usr/lib/pkgconfig` or change the `PKG_CONFIG_PATH` to point to this file. To change path follow the steps in `FAQ 3` or `FAQ 4` depending on whether you have `sudo` rights.
+In case you have errors with `ccache` (re-)install `ccache` as shown in `FAQ 11`.
+
+If you have issues with `java`, see `FAQ 12` and `FAQ 13`.
+
+### 2.2 `opencv*.pc` should be in the `PKG_CONFIG_PATH`
+Make sure `opencv*.pc` file is in the `/usr/lib/pkgconfig` or change the `PKG_CONFIG_PATH` to point to this file. 
+To change path follow the steps in `FAQ 3` or `FAQ 4` depending on whether you have `sudo` rights.
 Remember the path to your `opencv` installation as `OPENCV_PATH`.
 
-To check if `opencv.pc` is in the `/usr/lib/pkgconfig`:
+To check if `opencv*.pc` is in the `/usr/lib/pkgconfig`:
 ```
 cd /usr/lib/pkgconfig
-[ -f /usr/lib/pkgconfig/opencv.pc ] && echo "File exist"
+[ -f /usr/lib/pkgconfig/opencv*.pc ] && echo "File exist"
 ```
 You could also use `dlocate` to find the file.
 
-If you cannot find it, you might not have done `make install`.
+If you cannot find it, you might not have done `make install` in step `2.1`. 
 
-Alternatively, try:
+If the above does not work, try:
 ```
 sudo apt-get install libopencv-dev
 ```
@@ -160,6 +117,7 @@ cd $(root)/externalApps
 git clone https://gitlab.com/libeigen/eigen.git
 ```
 The path to eigen is needed later for `EIGEN_PATH`.
+
 ## 4. Install Vrep (CoppeliaSim)
 Download the linux version from https://coppeliarobotics.com/downloads. 
 
@@ -245,7 +203,21 @@ In case you encounter some other errors, you can debug using the following comma
 valgrind ./imacsLKAS 1
 ```
 
-# 6. How to use imacsLKAS?
+------------------------------------------------------------------------------------------------------------------
+
+
+# File Structure
+
+| File Name |                                   Description                                   |
+|:---------------:|:-----------------------------------------------------------------------------------:|
+|       `src/cpp_vrep_api/cpp_vrep_framework.cpp`      |     Main file; The framework initialisation variables are defined here. The synchronous (lock-step) simulation is also enforced here.  |
+|       `src/cpp_vrep_api/my_vrep_api.cpp`       |      Functions needed to setup the VREP API. |
+|       `src/LaneDetection_and_Control/lane_detection.cpp`       |      The image processing (perception) is defined here. |
+| `src/LaneDetection_and_Control/lateralcontrol_multiple.cpp` | The controller is defined here. |
+| `include/config.hpp` | Declarations of the variables in the above two files can be found here. |
+
+-----------------------------------------------------------------------------------------------------------
+# How to use imacsLKAS
 
 The main file: `src/cpp_vrep_api/cpp_vrep_framework.cpp`
 * The simulation step time, the total simulation time, the initial wait time, the sampling period(s) and delay(s) are hardcoded in this file.
@@ -257,6 +229,8 @@ Controller Design: `src/LaneDetection_and_Control/lateralcontrol_multiple.cpp`
 
 Image Processing: `src/LaneDetection_and_Control/lane_detection.cpp`
 * This file contains the image processing steps. Currently, we do the steps mentioned in [1]. You should be changing the functions in this file to include your own image processing algorithm.
+
+------------------------------------------------------------------------------------------
 
 # FAQs
 ## 1. When running `make` in `$(IMACSROOT)`: the following warnings (many) are also observed by us and is normal. We are working on improving this in a later version.
@@ -353,3 +327,37 @@ Especially, have an array of control inputs (steering_angle values) and only act
 
 To implement the pipelining, you would also have to amend `src/cpp_vrep_api/cpp_vrep_framework.cpp:129` to send the corresponding steering_angle instead of the latest one. You might also have to edit `VrepAPI.sim_delay(time_step)` accordingly.
 
+## 11. Installing ccache
+```
+sudo apt install -y ccache
+sudo /usr/sbin/update-ccache-symlinks
+echo 'export PATH="/usr/lib/ccache:$PATH"' | tee -a ~/.bashrc
+source ~/.bashrc && echo $PATH
+```
+## 12. Installing java
+You can follow the tutorial here: https://www.digitalocean.com/community/tutorials/how-to-install-java-with-apt-on-ubuntu-18-04.
+
+## 12. Error: unable to locate `*.jar`
+```
+sudo apt install default-jre
+sudo apt install default-jdk
+sudo update-alternatives --config javac
+sudo update-alternatives --config java
+```
+Choose the correct `jdk` version. `jre` does not have `tools.jar`
+Update the JAVA_HOME path
+```
+sudo gedit /etc/environment
+```
+At the end of this file, add the following line, making sure to replace the path with your own copied path:
+```
+JAVA_HOME="/usr/lib/jvm/java-11-openjdk-amd64/bin/"
+```
+Modifying this file will set the JAVA_HOME path for all users on your system.
+Save the file and exit the editor.
+
+Now reload this file to apply the changes to your current session:
+```
+source /etc/environment
+```
+If you do not have `sudo` access, follow the steps in `FAQ 4`.

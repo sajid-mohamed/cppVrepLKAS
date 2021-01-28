@@ -66,7 +66,7 @@ sudo apt-get install libqt4-dev
 
 If opencv is already installed, go to step `2.2`.
 
-#### 2.1 Quick Install OpenCV from Source Code
+#### 2.1. Quick Install OpenCV from Source Code
 
 For detailed OpenCV installation: follow steps from https://docs.opencv.org/trunk/d7/d9f/tutorial_linux_install.html.
 ```
@@ -92,7 +92,7 @@ In case you have errors with `ccache` (re-)install `ccache` as shown in `FAQ 11`
 
 If you have issues with `java`, see `FAQ 12` and `FAQ 13`.
 
-#### 2.2 `opencv*.pc` should be in the `PKG_CONFIG_PATH`
+#### 2.2. `opencv*.pc` should be in the `PKG_CONFIG_PATH`
 Make sure `opencv*.pc` file is in the `/usr/lib/pkgconfig` or change the `PKG_CONFIG_PATH` to point to this file. 
 To change path follow the steps in `FAQ 3` or `FAQ 4` depending on whether you have `sudo` rights.
 Remember the path to your `opencv` installation as `OPENCV_PATH`.
@@ -141,7 +141,7 @@ The `--strip-components` flag is used when a tar file would naturally expand its
 
 The `VREP_PATH` is then `$(root)/externalApps/vrep`.
 
-### 5 Change hardcoded paths
+### 5. Change hardcoded paths
 Please change the paths in the following files to the corresponding paths in your own system.
 ```
 $(root)/cppVrepLKAS.pro

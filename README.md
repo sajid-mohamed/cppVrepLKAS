@@ -245,21 +245,25 @@ terminate called after throwing an instance of 'cv::Exception'
   what():  /home/om/hd/infra/build_opencv/opencv/modules/core/src/convert.cpp:327: error: (-215) mv && n > 0 in function merge
 ```
 ### 3. Exporting paths permanently with sudo rights
-To set paths globally if you have sudo rights:
 ```
-sudo gedit /etc/environment
+cd
+sudo gedit .bash_profile
 ```
-At the end of this file, add the following line, making sure to replace the path with your own copied path:
+Add the export path commands in `.bash_profile' as shown below.
 ```
-PKG_CONFIG_PATH=/usr/lib/pkgconfig/
+export PKG_CONFIG_PATH=$PKG_CONFIG_PATH:/usr/lib/pkgconfig/
 ```
-If there were already variables present with the same name, append the above variables with a `:`.
-Modifying this file will set the variables for all users on your system.
-Save the file and exit the editor.
-Now reload this file to apply the changes to your current session:
+Save and close `.bash_profile`. Then, open `.bashrc`.
 ```
-source /etc/environment
+sudo gedit .bashrc
 ```
+Add the following line at the end of `.bashrc`.
+```
+source .bash_profile
+```
+Save and close the file.
+Now, the paths should be exported everytime you open a terminal.
+
 ### 4. Exporting paths without sudo rights
 If you want to export paths permanently,
 Open a terminal window using `Ctrl+Alt+T`
@@ -276,7 +280,7 @@ A safer way is to use quotes. Doing so is necessary if one or more directories i
 ```
 export CLANG="$(root)/clang+llvm-9.0.0-x86_64-linux-gnu-ubuntu-18.04/bin/clang"
 ```
-Alternatively, you can set the paths in `paths.sh` and then source paths
+Alternatively, you can set the paths in `paths.sh` and then source paths. Do not forget to include `export` command in the description here.
 ```
 cd $(IMACSROOT)
 source paths.sh

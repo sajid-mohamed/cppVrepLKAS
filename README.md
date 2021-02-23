@@ -259,7 +259,7 @@ sudo gedit .bashrc
 ```
 Add the following line at the end of `.bashrc`.
 ```
-source .bash_profile
+source ~/.bash_profile
 ```
 Save and close the file.
 Now, the paths should be exported everytime you open a terminal.
